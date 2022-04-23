@@ -1,7 +1,10 @@
-import API_KEYS from '../keys';
+// import API_KEYS from '../keys';
 
-const CLIENT_ID = API_KEYS.SPOTIFY.CLIENT_ID;
-const REDIRECT_URI = 'http://my-jamz.s3-website-us-east-1.amazonaws.com';
+const {
+    REACT_APP_CLIENT_ID,
+    // REACT_APP_AUTHORIZE_URL,
+    REACT_APP_REDIRECT_URL
+  } = process.env;
 let accessToken;
 const Spotify = {
     getAccessToken() {
@@ -22,7 +25,7 @@ const Spotify = {
             window.history.pushState('Access Token', null, '/');
             return accessToken;
         } else {
-            const accessURL = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&scope=playlist-modify-public&redirect_uri=${REDIRECT_URI}`;
+            const accessURL = `https://accounts.spotify.com/authorize?client_id=${REACT_APP_CLIENT_ID}&response_type=token&scope=playlist-modify-private&redirect_uri=${REACT_APP_REDIRECT_URL}`;
             window.location = accessURL;
         }
     },
